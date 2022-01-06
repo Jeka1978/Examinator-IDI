@@ -1,5 +1,7 @@
 package com.idi.examinatoridi;
 
+import com.idi.common.QuestionGenerator;
+import com.idi.common.model.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -7,7 +9,7 @@ import java.util.*;
 /**
  * @author Evgeny Borisov
  */
-@Service("tanah")
+@Service
 public class TanahQuestionGenerator implements QuestionGenerator {
 
     private List<Question> questions = new ArrayList<>(List.of(

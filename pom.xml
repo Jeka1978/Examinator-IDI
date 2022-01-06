@@ -25,6 +25,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.idi</groupId>
+            <artifactId>idi-exam-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

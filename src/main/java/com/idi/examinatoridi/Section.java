@@ -1,5 +1,6 @@
 package com.idi.examinatoridi;
 
+import com.idi.common.model.Question;
 import lombok.*;
 
 import java.util.List;
