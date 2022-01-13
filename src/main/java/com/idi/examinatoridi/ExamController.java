@@ -2,6 +2,9 @@ package com.idi.examinatoridi;
 
 import com.idi.common.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,16 +25,15 @@ import static java.util.Arrays.asList;
 public class ExamController {
 
 
-    private Map<String,String> sectionName2Url = new HashMap<>();
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+
 
     @Autowired
+    @LoadBalanced
     private RestTemplate restTemplate;
 
-    public ExamController() {
-
-        sectionName2Url.put("math", "http://localhost:8081/");
-        sectionName2Url.put("tanah", "http://localhost:8082/");
-    }
 
     /*@Autowired
         public ExamController(List<QuestionGenerator> questionGenerators) {
@@ -45,8 +47,11 @@ public class ExamController {
 
         for (String sectionName : examSpec.keySet()) {
 
+          /*  List<ServiceInstance> instances = discoveryClient.getInstances(sectionName);
+            instances.get(0).getUri()*/
+
             Integer amount = examSpec.get(sectionName);
-            String url = sectionName2Url.get(sectionName)+"api/questions/random?amount="+amount;
+            String url = "http://"+sectionName+"/api/questions/random?amount="+amount;
             Question[] questions = restTemplate.getForObject(url, Question[].class);
             exam.addSection(new Section(sectionName,asList(questions)));
         }
