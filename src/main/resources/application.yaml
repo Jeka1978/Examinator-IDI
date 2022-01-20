@@ -1,0 +1,13 @@
+spring:
+  rabbitmq:
+    host: b-2ba74915-be8e-4fef-9d02-f822bad41562.mq.us-east-1.amazonaws.com
+    password: Jeka12345678
+    username: Jeka
+    ssl:
+      enabled: true
+    template:
+      exchange: mainExam
+      default-receive-queue: examsQueue
+      routing-key:
+  application:
+    name: EXAMINATOR
